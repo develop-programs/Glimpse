@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserIcon, PlusCircleIcon, MessageCircleIcon, VideoIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";

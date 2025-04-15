@@ -3,7 +3,6 @@ import { InfoIcon, CheckCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { quickTips } from "@/data/mockdata";
-import { cn } from '@/lib/utils';
 
 const QuickTips = () => {
   const [showTips, setShowTips] = React.useState(true);

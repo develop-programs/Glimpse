@@ -64,14 +64,7 @@ export default function AiChat() {
     const handleSendMessage = async () => {
         if (!input.trim()) return
 
-        const userMessage = {
-            role: 'user',
-            content: input.trim(),
-            timestamp: Date.now()
-        };
-
         // Add user message
-        setMessages(prev => [...prev, userMessage]);
         setInput('');
 
         // Show typing indicator

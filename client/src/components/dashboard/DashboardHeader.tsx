@@ -13,12 +13,17 @@ const DashboardHeader = () => {
       className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mt-4"
     >
       <div className="space-y-2">
-        <div className="inline-block mb-3 bg-primary/10 dark:bg-primary/20 px-3 py-1 rounded-full">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className="inline-block mb-3 bg-gradient-to-r from-primary/10 to-blue-500/10 dark:from-primary/20 dark:to-blue-500/20 px-4 py-1.5 rounded-full border border-primary/20 shadow-sm"
+        >
           <span className="text-primary font-medium text-xs flex items-center">
-            <SparklesIcon className="h-3 w-3 mr-1" />
+            <SparklesIcon className="h-3.5 w-3.5 mr-1.5 text-blue-500 animate-pulse" />
             Video Conference Platform
           </span>
-        </div>
+        </motion.div>
         <h1 className="text-3xl font-bold tracking-tight">
           Welcome to <span className="bg-gradient-to-r from-sky-400 via-blue-500 to-green-500 bg-clip-text text-transparent">Glimpse</span>
         </h1>

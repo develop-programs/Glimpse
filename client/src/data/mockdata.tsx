@@ -1,5 +1,4 @@
 import { VideoIcon, UsersIcon, CalendarIcon, ClockIcon, BarChart3Icon } from "lucide-react";
-import React from "react";
 
 // Sample upcoming meetings data
 export const upcomingMeetings = [
