@@ -18,6 +18,7 @@ import { gettingStartedSteps } from "@/data/mockdata";
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import NewMeeting from '@/components/dashboard/Features/NewMeeting';
 import Join from '@/components/dashboard/Features/Join';
+import AiChat from '@/components/AiChat';
 
 export default function DashboardPage() {
     const [showGettingStarted, setShowGettingStarted] = useState(true);
@@ -116,6 +117,7 @@ export default function DashboardPage() {
                     </div>
                 </div>
             </div>
+            <AiChat />
         </div>
     );
 }

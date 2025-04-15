@@ -3,51 +3,131 @@ import { DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { motion } from 'framer-motion'
-import { Info } from 'lucide-react'
+import { Info, CalendarClock, Clock, Users, FileText } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
+import MultipleSelector, { Option } from '@/components/ui/MultiSelect'
+
+const OPTIONS: Option[] = [
+  { label: 'nextjs', value: 'nextjs' },
+  { label: 'React', value: 'react' },
+  { label: 'Remix', value: 'remix' },
+  { label: 'Vite', value: 'vite' },
+  { label: 'Nuxt', value: 'nuxt' },
+  { label: 'Vue', value: 'vue' },
+  { label: 'Svelte', value: 'svelte' },
+  { label: 'Angular', value: 'angular' },
+  { label: 'Ember', value: 'ember', disable: true },
+  { label: 'Gatsby', value: 'gatsby', disable: true },
+  { label: 'Astro', value: 'astro' },
+];
 
 
 export default function Schedule() {
   return (
-    <div className="space-y-5">
-      <DialogHeader>
-        <DialogTitle className="text-xl font-bold bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">Schedule Meeting</DialogTitle>
+    <div className="space-y-4">
+      <DialogHeader className="pb-1 border-b">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <DialogTitle className="text-xl font-bold bg-gradient-to-r from-primary to-sidebar-primary bg-clip-text text-transparent flex items-center gap-1">
+            <CalendarClock className="w-5 h-5 text-primary" />
+            Schedule New Meeting
+          </DialogTitle>
+        </motion.div>
       </DialogHeader>
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-        className="grid gap-4 py-5"
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="grid gap-3 py-2"
       >
-        <div className="grid gap-2">
-          <Label htmlFor="meeting-title" className="text-sm font-medium">Meeting Title</Label>
-          <Input id="meeting-title" placeholder="What's this meeting about?" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+        <div className="bg-card/50 p-2 rounded-lg border border-border">
+          <Label htmlFor="meeting-title" className="text-sm font-medium mb-1 flex items-center gap-1">
+            <span className="text-primary">Title</span>
+            <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="meeting-title"
+            placeholder="Enter meeting title"
+            className="mt-0.5 bg-background focus:ring-primary"
+          />
         </div>
-        <div className="grid grid-cols-2 gap-4 mt-2">
-          <div className="grid gap-2">
-            <Label htmlFor="date" className="text-sm font-medium">Date</Label>
-            <Input id="date" type="date" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="bg-card/50 p-2 rounded-lg border border-border">
+            <Label htmlFor="date" className="text-sm font-medium mb-1 flex items-center gap-1">
+              <Clock className="w-3 h-3 text-primary" />
+              <span>Date</span>
+              <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="date"
+              type="date"
+              className="mt-0.5 bg-background focus:ring-primary"
+            />
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="time" className="text-sm font-medium">Time</Label>
-            <Input id="time" type="time" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+
+          <div className="bg-card/50 p-2 rounded-lg border border-border">
+            <Label htmlFor="time" className="text-sm font-medium mb-1 flex items-center gap-1">
+              <Clock className="w-3 h-3 text-primary" />
+              <span>Time</span>
+              <span className="text-destructive">*</span>
+            </Label>
+            <Input
+              id="time"
+              type="time"
+              className="mt-0.5 bg-background focus:ring-primary"
+            />
           </div>
         </div>
-        <div className="grid gap-2 mt-2">
-          <Label htmlFor="description" className="text-sm font-medium">Description (Optional)</Label>
-          <Input id="description" placeholder="Meeting agenda or notes" className="border-blue-200 focus:border-blue-500 focus:ring-blue-500" />
+
+        <div className="bg-card/50 p-2 rounded-lg border border-border">
+          <Label htmlFor="participants" className="text-sm font-medium mb-1 flex items-center gap-1">
+            <Users className="w-3 h-3 text-primary" />
+            <span>Participants</span>
+          </Label>
+          <MultipleSelector
+            defaultOptions={OPTIONS}
+            placeholder="Select participants"
+            emptyIndicator={
+              <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+                no results found.
+              </p>
+            }
+          />
+        </div>
+
+        <div className="bg-card/50 p-2 rounded-lg border border-border">
+          <Label htmlFor="description" className="text-sm font-medium mb-1 flex items-center gap-1">
+            <FileText className="w-3 h-3 text-primary" />
+            <span>Description</span>
+            <span className="text-xs text-muted-foreground">(Optional)</span>
+          </Label>
+          <Textarea
+            id="description"
+            placeholder="Meeting agenda, topics to discuss, or additional notes"
+            className="mt-0.5 min-h-24 bg-background focus:ring-primary"
+          />
         </div>
       </motion.div>
 
-      <motion.div whileTap={{ scale: 0.98 }}>
-        <Button className="w-full py-6 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-lg font-medium shadow-md">
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        className="mt-3"
+      >
+        <Button className="w-full py-4 bg-gradient-to-r from-primary to-sidebar-primary hover:from-primary/90 hover:to-sidebar-primary/90 text-base font-medium shadow-md shadow-primary/20 dark:shadow-primary/10 rounded-lg">
           Schedule Meeting
         </Button>
       </motion.div>
 
-      <DialogFooter className="mt-4 text-xs flex gap-2 text-emerald-600 dark:text-emerald-400 pt-2 border-t">
-        <Info className="h-3 w-3" />
-        Calendar invites will be sent to all participants
+      <DialogFooter className="mt-2 text-xs flex items-center gap-1 text-chart-3 pt-2 border-t">
+        <Info className="h-3 w-3 text-chart-3" />
+        <span>Calendar invites will be sent to all participants</span>
       </DialogFooter>
     </div>
   )

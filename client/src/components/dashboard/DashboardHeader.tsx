@@ -10,10 +10,10 @@ const DashboardHeader = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+      className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mt-4"
     >
-      <div>
-        <div className="inline-block mb-1 bg-primary/10 dark:bg-primary/20 px-3 py-1 rounded-full">
+      <div className="space-y-2">
+        <div className="inline-block mb-3 bg-primary/10 dark:bg-primary/20 px-3 py-1 rounded-full">
           <span className="text-primary font-medium text-xs flex items-center">
             <SparklesIcon className="h-3 w-3 mr-1" />
             Video Conference Platform

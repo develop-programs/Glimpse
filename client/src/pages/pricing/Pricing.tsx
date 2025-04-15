@@ -6,8 +6,8 @@ import { Check } from "lucide-react";
 export default function Pricing() {
   return (
     <MainLayout>
-      <div className="py-20 bg-gradient-to-b from-sky-50 via-white to-green-50">
-        <div className="container">
+      <div className="mt-44">
+        <div className="container mx-auto">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">Simple, transparent pricing</h1>
             <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">

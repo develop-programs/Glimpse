@@ -77,7 +77,7 @@ export default function QuickActions() {
                   </Button>
                 </motion.div>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[500px]">
+              <DialogContent>
                 {(() => {
                   switch (action.id) {
                     case 'new': return <NewMeeting />;
