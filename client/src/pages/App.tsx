@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import MainLayout from "@/layouts/MainLayout";
 import { ArrowRight, Video, Calendar, Shield, Users, Check, Star, Zap, Clock, Globe } from "lucide-react";
 import { Link } from "react-router";
+import { lazy } from "react";
 
 // Import newly created components
-import Testimonials from "@/components/landing/Testimonials";
-import CTASection from "@/components/landing/CTASection";
+const Testimonials = lazy(() => import("@/components/landing/Testimonials"));
+const CTASection = lazy(() => import("@/components/landing/CTASection"));
 
 export default function App() {
   return (
@@ -21,10 +22,10 @@ export default function App() {
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-sky-50 text-blue-600 text-sm font-medium mb-4 md:mb-6 border border-sky-200/30">
                   <Zap className="w-3 h-3 md:w-4 md:h-4 mr-1.5 md:mr-2" /> Reimagined Video Meetings
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                <h1 className="text-[clamp(2rem,5vw,3.5rem)] font-black tracking-tight leading-tight">
                   Connect with anyone, <span className="text-blue-600">anywhere</span>
                 </h1>
-                <p className="mt-4 md:mt-6 text-base md:text-xl text-muted-foreground max-w-xl">
+                <p className="mt-4 md:mt-6 text-[clamp(1rem,1.5vw,1.125rem)] text-muted-foreground max-w-xl font-medium">
                   Simple, secure, and reliable video conferencing for teams of all sizes. Join meetings effortlessly from any device.
                 </p>
               </div>
@@ -58,14 +59,22 @@ export default function App() {
               </div>
             </div>
 
-            <div className="w-full lg:w-1/2 mt-8 lg:mt-0">
+            <div className="w-full lg:w-1/2 mt-8 lg:mt-0 select-none">
               <div className="relative z-10 bg-gradient-to-tr from-white/80 to-sky-50/50 rounded-xl sm:rounded-2xl border border-sky-200/30 p-1 sm:p-2 shadow-lg mx-auto max-w-lg lg:max-w-none">
                 <div className="aspect-video rounded-lg sm:rounded-xl overflow-hidden bg-black/90 relative">
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <img src="./conference.png" alt="Video call preview" className="w-full h-full object-cover opacity-80" decoding="async" loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <Button size="lg" variant="secondary" className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 rounded-full w-10 h-10 sm:w-14 sm:h-14 p-0 flex items-center justify-center">
-                      <Video className="h-4 w-4 sm:h-6 sm:w-6" />
+                    <img
+                      src="./conference.webp"
+                      alt="Video call preview"
+                      className="w-full h-full object-cover opacity-80"
+                      width="640"
+                      height="360"
+                      decoding="async"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <Button size="icon" variant="secondary" className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 rounded-full size-12 p-0 flex items-center justify-center">
+                      <Video className="size-6" />
                     </Button>
                   </div>
                 </div>

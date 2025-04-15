@@ -63,21 +63,28 @@ export default function CTASection() {
                         <Button
                             size="lg"
                             variant="secondary"
-                            className="px-4 sm:px-6 md:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white font-medium w-full sm:w-auto"
+                            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl 
+                                      bg-white text-blue-600 font-semibold w-full sm:w-auto
+                                      hover:bg-blue-50 hover:shadow-blue-300/20 hover:shadow-2xl
+                                      hover:scale-105 transition-all duration-300 rounded-xl"
                         >
-                            <Link to="/room/new" className="flex items-center justify-center">
+                            <Link to="/room/new" className="flex items-center justify-center gap-2">
                                 Start a Meeting Now
-                                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                <ArrowRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5 animate-pulse-subtle" />
                             </Link>
                         </Button>
                         <Button
                             size="lg"
                             variant="outline"
-                            className="px-4 sm:px-6 md:px-8 py-5 sm:py-6 text-base sm:text-lg bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border-white/30 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+                            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg 
+                                      bg-white/15 backdrop-blur-sm text-white border-white/40
+                                      hover:bg-white/25 hover:border-white/60 hover:shadow-xl
+                                      hover:scale-105 transition-all duration-300 w-full sm:w-auto
+                                      font-medium rounded-xl"
                         >
-                            <Link to="/features" className="flex items-center justify-center">
+                            <Link to="/features" className="flex items-center justify-center gap-2">
                                 Explore Features
-                                <Video className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                                <Video className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
                             </Link>
                         </Button>
                     </motion.div>
@@ -121,11 +128,11 @@ export default function CTASection() {
                         transition={{ duration: 0.7, delay: 0.4 }}
                     >
                         <div className="flex -space-x-3 sm:-space-x-4">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" />
-                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" />
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" />
-                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" />
-                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center text-xs font-medium text-white">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/60 flex items-center justify-center text-xs font-medium text-white">
                                 +9k
                             </div>
                         </div>

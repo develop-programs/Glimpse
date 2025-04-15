@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-5 lg:col-span-4">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="./glimpse.png" alt="" className="w-44" />
+              <img src="./glimpse.png" alt="" className="w-36" decoding="async" loading="lazy" />
             </Link>
             <p className="text-muted-foreground max-w-xs">
               Connecting people through high-quality, secure video meetings that are accessible to everyone, everywhere.
