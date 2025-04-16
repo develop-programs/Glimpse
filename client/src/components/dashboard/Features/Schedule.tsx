@@ -6,19 +6,20 @@ import { motion } from 'framer-motion'
 import { Info, CalendarClock, Clock, Users, FileText } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import MultipleSelector, { Option } from '@/components/ui/MultiSelect'
+import { DatetimePicker } from '@/components/ui/DateTimePicker'
 
 const OPTIONS: Option[] = [
-  { label: 'nextjs', value: 'nextjs' },
-  { label: 'React', value: 'react' },
-  { label: 'Remix', value: 'remix' },
-  { label: 'Vite', value: 'vite' },
-  { label: 'Nuxt', value: 'nuxt' },
-  { label: 'Vue', value: 'vue' },
-  { label: 'Svelte', value: 'svelte' },
-  { label: 'Angular', value: 'angular' },
-  { label: 'Ember', value: 'ember', disable: true },
-  { label: 'Gatsby', value: 'gatsby', disable: true },
-  { label: 'Astro', value: 'astro' },
+  { label: 'John Smith', value: 'john.smith@example.com' },
+  { label: 'Sarah Johnson', value: 'sarah.johnson@example.com' },
+  { label: 'Michael Brown', value: 'michael.brown@example.com' },
+  { label: 'Emily Davis', value: 'emily.davis@example.com' },
+  { label: 'David Wilson', value: 'david.wilson@example.com' },
+  { label: 'Jessica Taylor', value: 'jessica.taylor@example.com' },
+  { label: 'Robert Martinez', value: 'robert.martinez@example.com' },
+  { label: 'Jennifer Lee', value: 'jennifer.lee@example.com' },
+  { label: 'Thomas Anderson', value: 'thomas.anderson@example.com', disable: true },
+  { label: 'Amanda White', value: 'amanda.white@example.com', disable: true },
+  { label: 'Daniel Clark', value: 'daniel.clark@example.com' },
 ];
 
 
@@ -56,31 +57,17 @@ export default function Schedule() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <div className="bg-card/50 p-2 rounded-lg border border-border">
-            <Label htmlFor="date" className="text-sm font-medium mb-1 flex items-center gap-1">
-              <Clock className="w-3 h-3 text-primary" />
-              <span>Date</span>
-              <span className="text-destructive">*</span>
-            </Label>
-            <Input
-              id="date"
-              type="date"
-              className="mt-0.5 bg-background focus:ring-primary"
-            />
-          </div>
-
+        <div className="grid grid-cols-1 gap-3">
           <div className="bg-card/50 p-2 rounded-lg border border-border">
             <Label htmlFor="time" className="text-sm font-medium mb-1 flex items-center gap-1">
               <Clock className="w-3 h-3 text-primary" />
-              <span>Time</span>
+              <span>Select Date and Time</span>
               <span className="text-destructive">*</span>
             </Label>
-            <Input
-              id="time"
-              type="time"
-              className="mt-0.5 bg-background focus:ring-primary"
-            />
+            <DatetimePicker format={[
+              ["months", "days", "years"],
+              ["hours", "minutes", "am/pm"],
+            ]} className='w-full' />
           </div>
         </div>
 
