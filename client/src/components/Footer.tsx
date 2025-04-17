@@ -5,14 +5,14 @@ import { Input } from "./ui/input";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-background to-muted/30">
-      <div className="container px-4 py-12 mt-12 mx-auto">
+    <footer className="bg-gradient-to-b from-background to-muted/30 py-24">
+      <div className="container mx-auto">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           {/* Company Info */}
           <div className="space-y-5 lg:col-span-4">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="./glimpse.png" alt="" className="w-36" decoding="async" loading="lazy" />
+              <img src="./glimpse.webp" alt="" className="w-36" decoding="async" loading="lazy" />
             </Link>
             <p className="text-muted-foreground max-w-xs">
               Connecting people through high-quality, secure video meetings that are accessible to everyone, everywhere.

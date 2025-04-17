@@ -5,88 +5,49 @@ import { motion } from "motion/react";
 
 export default function CTASection() {
     return (
-        <section className="py-8 sm:py-10 md:py-12 px-4 sm:px-6 relative overflow-hidden rounded-xl sm:rounded-2xl">
-            {/* Background elements */}
-            <div className="absolute inset-0 bg-gradient-to-br from-sky-400 via-blue-500 to-emerald-500 opacity-75"></div>
-
-
-            {/* Animated circles - adjusted for better mobile appearance */}
-            <motion.div
-                className="absolute top-1/3 left-1/4 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-emerald-200/20 rounded-full blur-3xl"
-                animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.5, 0.8, 0.5]
-                }}
-                transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                }}
-            />
-            <motion.div
-                className="absolute bottom-1/3 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-sky-200/20 rounded-full blur-3xl"
-                animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.3, 0.6, 0.3]
-                }}
-                transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                    delay: 1
-                }}
-            />
-
-            <div className="container relative z-10 text-center px-2 sm:px-4">
+        <section className="container mx-auto py-8 sm:py-10 md:py-12 px-4 sm:px-6 mt-12 overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-sky-400 via-blue-500 to-emerald-500 opacity-75">
+            <div className="text-center z-10">
                 <motion.div
-                    className="max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto"
+                    className="max-w-3xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.7 }}
                 >
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-2">
+                    <h2 className="text-[clamp(1.875rem,5vw,3rem)] font-bold text-white mb-2">
                         Start connecting with your team today
                     </h2>
-                    <div className="w-16 sm:w-20 md:w-24 h-1 bg-white/50 mx-auto rounded-full my-4 sm:my-6"></div>
-                    <p className="mt-2 sm:mt-4 text-base sm:text-lg md:text-xl text-white/90 leading-relaxed px-2">
+                    <div className="w-16 sm:w-20 h-1 bg-white/50 mx-auto rounded-full my-4" />
+                    <p className="mt-2 text-[clamp(1rem,2.5vw,1.25rem)] text-white/90 leading-relaxed">
                         Join thousands of innovative teams already transforming their virtual collaboration experience
                     </p>
 
                     <motion.div
-                        className="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+                        className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 justify-center"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.2 }}
                     >
-                        <Button
-                            size="lg"
-                            variant="secondary"
-                            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-xl 
-                                      bg-white text-blue-600 font-semibold w-full sm:w-auto
-                                      hover:bg-blue-50 hover:shadow-blue-300/20 hover:shadow-2xl
-                                      hover:scale-105 transition-all duration-300 rounded-xl"
-                        >
-                            <Link to="/room/new" className="flex items-center justify-center gap-2">
+                        <Link to="/room/new" className="w-full sm:w-auto">
+                            <Button
+                                size="lg"
+                                className="w-full bg-white hover:bg-white/90 text-blue-600 font-medium shadow-lg hover:shadow-xl border-0"
+                            >
                                 Start a Meeting Now
-                                <ArrowRight className="ml-1 h-4 w-4 sm:h-5 sm:w-5 animate-pulse-subtle" />
-                            </Link>
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg 
-                                      bg-white/15 backdrop-blur-sm text-white border-white/40
-                                      hover:bg-white/25 hover:border-white/60 hover:shadow-xl
-                                      hover:scale-105 transition-all duration-300 w-full sm:w-auto
-                                      font-medium rounded-xl"
-                        >
-                            <Link to="/features" className="flex items-center justify-center gap-2">
+                                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
+                            </Button>
+                        </Link>
+                        <Link to="/features" className="w-full sm:w-auto">
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="w-full bg-white/25 border-white text-white hover:bg-white/20 backdrop-blur-sm"
+                            >
                                 Explore Features
-                                <Video className="ml-1 h-4 w-4 sm:h-5 sm:w-5" />
-                            </Link>
-                        </Button>
+                                <Video className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                            </Button>
+                        </Link>
                     </motion.div>
 
                     {/* Statistics Section - improved grid for mobile */}
@@ -101,22 +62,22 @@ export default function CTASection() {
                             <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
                                 <Users className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                             </div>
-                            <h3 className="text-2xl sm:text-3xl font-bold text-white">10,000+</h3>
-                            <p className="text-white/70 mt-1 text-sm sm:text-base">Active Teams</p>
+                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">10,000+</h3>
+                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Active Teams</p>
                         </div>
                         <div className="flex flex-col items-center py-3 sm:py-0">
                             <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
                                 <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                             </div>
-                            <h3 className="text-2xl sm:text-3xl font-bold text-white">45M+</h3>
-                            <p className="text-white/70 mt-1 text-sm sm:text-base">Meeting Minutes</p>
+                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">45M+</h3>
+                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Meeting Minutes</p>
                         </div>
                         <div className="flex flex-col items-center py-3 sm:py-0">
                             <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
                                 <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                             </div>
-                            <h3 className="text-2xl sm:text-3xl font-bold text-white">99.9%</h3>
-                            <p className="text-white/70 mt-1 text-sm sm:text-base">Uptime</p>
+                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">99.9%</h3>
+                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Uptime</p>
                         </div>
                     </motion.div>
 
@@ -132,16 +93,16 @@ export default function CTASection() {
                             <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
                             <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white/40" decoding="async" loading="lazy" />
-                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/60 flex items-center justify-center text-xs font-medium text-white">
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/60 flex items-center justify-center text-[clamp(0.75rem,1.5vw,0.875rem)] font-medium text-white">
                                 +9k
                             </div>
                         </div>
-                        <div className="ml-0 sm:ml-4 text-xs sm:text-sm text-center sm:text-left">
+                        <div className="ml-0 sm:ml-4 text-[clamp(0.75rem,2vw,0.875rem)] text-center sm:text-left">
                             <span className="font-medium text-white">Join</span> thousands of happy teams
                         </div>
                     </motion.div>
                 </motion.div>
             </div>
-        </section>
+        </section >
     );
 }

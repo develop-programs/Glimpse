@@ -3,10 +3,12 @@ import { DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { motion } from 'framer-motion'
-import { Info, CalendarClock, Clock, Users, FileText } from 'lucide-react'
+import { Info, CalendarClock, Clock, Users, FileText, Lock, Sparkles } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import MultipleSelector, { Option } from '@/components/ui/MultiSelect'
 import { DatetimePicker } from '@/components/ui/DateTimePicker'
+import { Switch } from '@/components/ui/switch'
+import React from 'react'
 
 const OPTIONS: Option[] = [
   { label: 'John Smith', value: 'john.smith@example.com' },
@@ -24,6 +26,7 @@ const OPTIONS: Option[] = [
 
 
 export default function Schedule() {
+  const [ToggleProtected, setToggleProtected] = React.useState(true);
   return (
     <div className="space-y-4">
       <DialogHeader className="pb-1 border-b">
@@ -71,6 +74,23 @@ export default function Schedule() {
           </div>
         </div>
 
+        <div className="bg-card/50 p-2 rounded-lg border border-border space-y-2">
+          <Label htmlFor="participants" className="text-sm font-medium mb-1 flex items-center gap-1 justify-between">
+            <div className='flex items-center gap-1'>
+              <Lock className="size-3 text-primary" />
+              <span>Protected</span>
+            </div>
+            <Switch onClick={() => { setToggleProtected(!ToggleProtected) }} />
+          </Label>
+          <div className='flex items-center justify-between gap-3'>
+            <Input type='password' placeholder='Enter Password' disabled={ToggleProtected} />
+            <Button variant="outline" className="w-1/3 flex items-center gap-1" disabled={ToggleProtected}>
+              <Sparkles className='size-3' />
+              <span className="text-xs font-medium">Generate</span>
+            </Button>
+          </div>
+        </div>
+
         <div className="bg-card/50 p-2 rounded-lg border border-border">
           <Label htmlFor="participants" className="text-sm font-medium mb-1 flex items-center gap-1">
             <Users className="w-3 h-3 text-primary" />
@@ -86,6 +106,7 @@ export default function Schedule() {
             }
           />
         </div>
+
 
         <div className="bg-card/50 p-2 rounded-lg border border-border">
           <Label htmlFor="description" className="text-sm font-medium mb-1 flex items-center gap-1">

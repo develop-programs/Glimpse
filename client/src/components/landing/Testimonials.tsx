@@ -44,8 +44,8 @@ export default function Testimonials() {
     }
 
     return (
-        <section aria-label="Testimonials" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-            <div className="container mx-auto max-w-7xl">
+        <section aria-label="Testimonials">
+            <div className="container mx-auto py-24">
                 <motion.div
                     className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16"
                     initial={{ opacity: 0, y: 20 }}

@@ -3,6 +3,8 @@ import { SparklesIcon, HelpCircleIcon, BellIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import Notification from "./Features/Notification";
+import Account from "./Features/Account";
 
 const DashboardHeader = () => {
   return (
@@ -33,10 +35,35 @@ const DashboardHeader = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" className="relative border border-border">
-          <HelpCircleIcon className="h-4 w-4" />
-        </Button>
-
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="ghost" size="icon" className="relative border border-border">
+              <HelpCircleIcon className="h-4 w-4" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent align='end' className='max-w-lg'>
+            <div className="space-y-2">
+              <h4 className="font-medium text-sm">Need help?</h4>
+              <div className="text-xs text-muted-foreground space-y-1.5">
+                <p className="flex items-center">
+                  <span className="bg-primary/10 text-primary size-5 grid place-content-center p-1 rounded-full mr-1.5">1</span>
+                  Create or join a meeting
+                </p>
+                <p className="flex items-center">
+                  <span className="bg-primary/10 text-primary size-5 grid place-content-center p-1 rounded-full mr-1.5">2</span>
+                  Share your meeting ID
+                </p>
+                <p className="flex items-center">
+                  <span className="bg-primary/10 text-primary size-5 grid place-content-center p-1 rounded-full mr-1.5">3</span>
+                  Adjust settings as needed
+                </p>
+              </div>
+              <Button size="sm" variant="outline" className="w-full text-xs mt-1">
+                View Documentation
+              </Button>
+            </div>
+          </PopoverContent>
+        </Popover>
 
         <Popover>
           <PopoverTrigger asChild>
@@ -47,7 +74,9 @@ const DashboardHeader = () => {
               </span>
             </Button>
           </PopoverTrigger>
-          <PopoverContent align='end' className='max-w-52'></PopoverContent>
+          <PopoverContent align='end' className='max-w-xl'>
+            <Notification />
+          </PopoverContent>
         </Popover>
 
         <Popover>
@@ -56,7 +85,9 @@ const DashboardHeader = () => {
               <AvatarFallback className="bg-primary text-primary-foreground">US</AvatarFallback>
             </Avatar>
           </PopoverTrigger>
-          <PopoverContent align='end' className='max-w-52'></PopoverContent>
+          <PopoverContent align='end' className='max-w-52'>
+            <Account />
+          </PopoverContent>
         </Popover>
 
       </div>
