@@ -24,7 +24,7 @@ export default function DashboardPage() {
     const [showGettingStarted, setShowGettingStarted] = useState(true);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pb-24">
             <div className="container mx-auto max-w-7xl py-6 px-4">
                 <div className="space-y-5">
                     {/* Dashboard Header */}

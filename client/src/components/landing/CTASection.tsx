@@ -1,3 +1,4 @@
+import React from "react";
 import { ArrowRight, Video, Users, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
@@ -52,33 +53,25 @@ export default function CTASection() {
 
                     {/* Statistics Section - improved grid for mobile */}
                     <motion.div
-                        className="mt-10 sm:mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto"
+                        className="mt-10 grid grid-cols-3 gap-6 max-w-3xl mx-auto"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, delay: 0.3 }}
                     >
-                        <div className="flex flex-col items-center py-3 sm:py-0">
-                            <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
-                                <Users className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                        {[
+                            { icon: <Users />, value: "10,000+", label: "Active Teams" },
+                            { icon: <Clock />, value: "45M+", label: "Meeting Minutes" },
+                            { icon: <CheckCircle2 />, value: "99.9%", label: "Uptime" }
+                        ].map((stat, index) => (
+                            <div key={index} className="flex flex-col items-center py-3 sm:py-0">
+                                <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3">
+                                    {React.cloneElement(stat.icon, { className: "size-5 sm:size-6 text-white" })}
+                                </div>
+                                <h3 className="text-[clamp(0.5rem,5vw,1.875rem)] font-bold text-white">{stat.value}</h3>
+                                <p className="text-white/70 mt-1 text-[clamp(0.7rem,2vw,1rem)]">{stat.label}</p>
                             </div>
-                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">10,000+</h3>
-                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Active Teams</p>
-                        </div>
-                        <div className="flex flex-col items-center py-3 sm:py-0">
-                            <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
-                                <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                            </div>
-                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">45M+</h3>
-                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Meeting Minutes</p>
-                        </div>
-                        <div className="flex flex-col items-center py-3 sm:py-0">
-                            <div className="bg-white/10 backdrop-blur-sm rounded-full p-2 sm:p-3 mb-3 sm:mb-4">
-                                <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
-                            </div>
-                            <h3 className="text-[clamp(1.5rem,5vw,1.875rem)] font-bold text-white">99.9%</h3>
-                            <p className="text-white/70 mt-1 text-[clamp(0.875rem,2vw,1rem)]">Uptime</p>
-                        </div>
+                        ))}
                     </motion.div>
 
                     <motion.div

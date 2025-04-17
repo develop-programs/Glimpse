@@ -9,6 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 
 interface FeatureCardProps {
@@ -201,7 +203,8 @@ export default function Feature() {
     };
 
     return (
-        <MainLayout>
+        <>
+            <Navbar />
             {/* Hero Section */}
             <section className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-b from-white via-sky-50/10 to-white">
                 {/* Background elements */}
@@ -268,6 +271,7 @@ export default function Feature() {
                     </div>
                 </motion.div>
             </div>
-        </MainLayout>
+            <Footer />
+        </>
     );
 }

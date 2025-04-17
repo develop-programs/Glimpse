@@ -1,91 +1,85 @@
 import { Link } from "react-router";
-import { Mail, Phone, Instagram, Twitter, Facebook, Linkedin, Send } from "lucide-react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Mail, Phone, Instagram, Twitter, Facebook, Linkedin, Send, LucideIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
+// Type definitions
+interface SocialIconProps {
+  icon: LucideIcon;
+  label: string;
+  href?: string;
+}
+
+interface FooterLink {
+  to: string;
+  text: string;
+}
+
+interface FooterLinkGroupProps {
+  title: string;
+  links: FooterLink[];
+}
+
+// Reusable components to simplify structure
+const SocialIcon: React.FC<SocialIconProps> = ({ icon: Icon, label, href = "#" }) => (
+  <a href={href} aria-label={label} className="text-muted-foreground hover:text-primary transition-colors">
+    <Icon size={20} />
+  </a>
+);
+
+const FooterLinkGroup: React.FC<FooterLinkGroupProps> = ({ title, links }) => (
+  <div className="lg:col-span-2 md:col-span-1">
+    <h4 className="text-base font-medium mb-5">{title}</h4>
+    <ul className="space-y-3">
+      {links.map((link, i) => (
+        <li key={i}>
+          <Link to={link.to} className="text-muted-foreground hover:text-foreground transition-colors">
+            {link.text}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default function Footer() {
+  const productLinks: FooterLink[] = [
+    { to: "/features", text: "Features" },
+    { to: "/pricing", text: "Pricing" },
+    { to: "/integrations", text: "Integrations" },
+    { to: "/updates", text: "Updates" }
+  ];
+
+  const resourceLinks: FooterLink[] = [
+    { to: "/help", text: "Help Center" },
+    { to: "/privacy", text: "Privacy" },
+    { to: "/terms", text: "Terms" },
+    { to: "/security", text: "Security" }
+  ];
+
   return (
     <footer className="bg-gradient-to-b from-background to-muted/30 py-24">
       <div className="container mx-auto">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12">
           {/* Company Info */}
           <div className="space-y-5 lg:col-span-4">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="./glimpse.webp" alt="" className="w-36" decoding="async" loading="lazy" />
+              <img src="./glimpse.webp" alt="logo" width={150} height={100} decoding="async" loading="lazy" />
             </Link>
             <p className="text-muted-foreground max-w-xs">
               Connecting people through high-quality, secure video meetings that are accessible to everyone, everywhere.
             </p>
             <div className="flex space-x-4">
-              <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
-                <Linkedin size={20} />
-              </a>
+              <SocialIcon icon={Facebook} label="Facebook" />
+              <SocialIcon icon={Twitter} label="Twitter" />
+              <SocialIcon icon={Instagram} label="Instagram" />
+              <SocialIcon icon={Linkedin} label="LinkedIn" />
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="lg:col-span-2 md:col-span-1">
-            <h4 className="text-base font-medium mb-5">Product</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/features" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link to="/integrations" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Integrations
-                </Link>
-              </li>
-              <li>
-                <Link to="/updates" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Updates
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div className="lg:col-span-2 md:col-span-1">
-            <h4 className="text-base font-medium mb-5">Resources</h4>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/help" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Privacy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Terms
-                </Link>
-              </li>
-              <li>
-                <Link to="/security" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Security
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <FooterLinkGroup title="Product" links={productLinks} />
+          <FooterLinkGroup title="Resources" links={resourceLinks} />
 
           {/* Contact Info */}
           <div className="lg:col-span-2">

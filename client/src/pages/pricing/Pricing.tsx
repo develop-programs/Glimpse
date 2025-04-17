@@ -1,11 +1,13 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import MainLayout from "@/layouts/MainLayout";
 import { Check } from "lucide-react";
 
 export default function Pricing() {
   return (
-    <MainLayout>
+    <>
+      <Navbar />
       <div className="mt-44">
         <div className="container mx-auto">
           <div className="text-center">
@@ -171,6 +173,7 @@ export default function Pricing() {
           </div>
         </div>
       </div>
-    </MainLayout>
+      <Footer />
+    </>
   );
 }

@@ -18,21 +18,21 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full backdrop-blur transition-all duration-300",
+        "fixed top-0 left-0 z-50 w-full backdrop-blur transition-all duration-300",
         scrolled
           ? "border-b border-sky-100/30 bg-white/80 shadow-sm shadow-sky-100/20"
           : "bg-white/60"
       )}
     >
-      <div className="container mx-auto flex py-5 items-center justify-between">
+      <div className="container mx-auto flex py-5 px-4 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
             src="/glimpse.webp"
             alt="Glimpse"
-            className="w-32 h-auto"
             width={112}
             height={40}
+            decoding="async"
             loading="lazy"
           />
         </Link>
@@ -64,6 +64,7 @@ export default function Navbar() {
         <Button
           variant="ghost"
           size="icon"
+          aria-label="Toggle Menu"
           className={cn(
             "md:hidden text-sky-600 hover:text-sky-800 hover:bg-sky-50/50"
           )}
@@ -73,7 +74,6 @@ export default function Navbar() {
         </Button>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -81,7 +81,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="container overflow-hidden md:hidden"
+            className="container mx-auto overflow-hidden md:hidden"
           >
             <nav className={cn(
               "flex flex-col space-y-4 py-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg shadow-sky-100/30"

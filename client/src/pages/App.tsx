@@ -16,7 +16,7 @@ export default function App() {
     <section className="px-4">
       <Navbar />
       {/* Hero Section */}
-      <section className="mt-12 py-32">
+      <section className="xl:mt-12 py-32">
         {/* Updated hero background gradient with sky blue tones */}
         <div className="container mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
@@ -34,7 +34,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <div className="flex flex-row gap-3 sm:gap-4">
                 <Link to="/room/new">
                   <Button size="lg" className="group">
                     Start a Meeting
