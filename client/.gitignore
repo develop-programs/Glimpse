@@ -7,14 +7,37 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Build outputs
 dist
 dist-ssr
+dev-dist
 *.local
+build
+storybook-static
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Testing
+coverage
+.nyc_output
+cypress/videos
+cypress/screenshots
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea
 .DS_Store
 *.suo
@@ -22,3 +45,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary files
+.temp
+.tmp
+.cache
+tsconfig.tsbuildinfo
+
+# PWA files
+**/public/workbox-*.js
+**/public/sw.js
+**/public/fallback-*.js
