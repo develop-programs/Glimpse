@@ -1,7 +1,9 @@
-import { Video, Calendar, Shield, Users, Star, Clock, Globe, Zap, MessageSquare, Share2, FileText, Headphones, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useAtom } from "jotai";
+import { featureData } from "@/data/feature";
 
 interface FeatureItem {
     icon: React.JSX.Element;
@@ -18,100 +20,9 @@ interface FeatureSection {
     items: FeatureItem[];
 }
 
-interface FeatureData {
-    free: FeatureSection;
-    premium: {
-        title: string;
-        icon: React.JSX.Element;
-        heading: string;
-        description: string;
-        color: string;
-        previewItems: FeatureItem[];
-    };
-}
-
-const featureData: FeatureData = {
-    free: {
-        title: "Free Features",
-        icon: <Zap className="w-4 h-4 mr-2" />,
-        heading: "Start with powerful basics",
-        description: "Begin your journey with our feature-rich free plan",
-        color: "emerald",
-        items: [
-            {
-                icon: <Video className="h-6 w-6 text-emerald-600" />,
-                title: "Basic Video Conferencing",
-                description: "Host meetings with up to 40 minutes duration for free"
-            },
-            {
-                icon: <MessageSquare className="h-6 w-6 text-emerald-600" />,
-                title: "In-Meeting Chat",
-                description: "Send messages to participants during your call"
-            },
-            {
-                icon: <Share2 className="h-6 w-6 text-emerald-600" />,
-                title: "Screen Sharing",
-                description: "Present your screen to all meeting participants"
-            }
-        ]
-    },
-    premium: {
-        title: "Premium Features",
-        icon: <Star className="w-4 h-4 mr-2" />,
-        heading: "Everything you need for better meetings",
-        description: "Powerful tools designed to make your video conferences more productive and engaging",
-        color: "blue",
-        previewItems: [
-            {
-                icon: <Video className="h-6 w-6 text-blue-600" />,
-                title: "HD Video & Audio",
-                description: "Crystal clear communication with adaptive quality for any connection"
-            },
-            {
-                icon: <Shield className="h-6 w-6 text-blue-600" />,
-                title: "Bank-Level Security",
-                description: "End-to-end encryption and meeting passwords for complete privacy"
-            },
-            {
-                icon: <Calendar className="h-6 w-6 text-blue-600" />,
-                title: "Smart Scheduling",
-                description: "Seamless calendar integration with automated reminders"
-            },
-            {
-                icon: <Globe className="h-6 w-6 text-green-600" />,
-                title: "Cross-Platform",
-                description: "Works on all devices including mobile, tablet, and desktop"
-            },
-            {
-                icon: <Users className="h-6 w-6 text-green-600" />,
-                title: "Breakout Rooms",
-                description: "Split meetings into smaller groups for focused discussions"
-            },
-            {
-                icon: <Clock className="h-6 w-6 text-green-600" />,
-                title: "Meeting Recording",
-                description: "Record and share meetings with cloud storage integration"
-            },
-            {
-                icon: <FileText className="h-6 w-6 text-blue-600" />,
-                title: "Meeting Transcription",
-                description: "Automatic speech-to-text conversion for all your meetings"
-            },
-            {
-                icon: <Headphones className="h-6 w-6 text-green-600" />,
-                title: "Virtual Background",
-                description: "Professional backgrounds to maintain privacy and professionalism"
-            },
-            {
-                icon: <Users className="h-6 w-6 text-blue-600" />,
-                title: "Unlimited Participants",
-                description: "Host meetings with as many people as needed without restrictions"
-            }
-        ]
-    }
-};
 
 export default function Feature() {
+    const [data] = useAtom(featureData);
     // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -244,7 +155,7 @@ export default function Feature() {
     // Premium feature preview section component
     const PremiumFeaturePreview = () => {
         // Get first 6 premium features without modifying original array
-        const previewFeatures = featureData.premium.previewItems.slice(0, 6);
+        const previewFeatures = data.premium.previewItems.slice(0, 6);
 
         return (
             <>
@@ -260,11 +171,11 @@ export default function Feature() {
                         whileHover={{ scale: 1.05 }}
                         transition={{ type: "spring", stiffness: 400 }}
                     >
-                        {featureData.premium.icon} {featureData.premium.title}
+                        {data.premium.icon} {data.premium.title}
                     </motion.div>
-                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{featureData.premium.heading}</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold tracking-tight">{data.premium.heading}</h2>
                     <p className="mt-4 text-lg text-muted-foreground">
-                        {featureData.premium.description}
+                        {data.premium.description}
                     </p>
                 </motion.div>
 
@@ -318,7 +229,7 @@ export default function Feature() {
         <section className="">
             <div className="container mx-auto py-24">
                 {/* Free Features */}
-                <FeatureSection data={featureData.free} />
+                <FeatureSection data={data.free} />
 
                 {/* Premium Features Preview */}
                 <PremiumFeaturePreview />

@@ -9,7 +9,7 @@ export default function Room() {
   const [showParticipants, setShowParticipants] = useState(false);
   const [isControlsVisible, setIsControlsVisible] = useState(true);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [participants, setParticipants] = useState([
+  const [participants] = useState([
     { id: 1, name: 'You' },
     { id: 2, name: 'Alex Johnson' },
     { id: 3, name: 'Sarah Miller' },
@@ -321,9 +321,8 @@ export default function Room() {
           >
             <motion.button
               onClick={toggleMute}
-              className={`p-3 rounded-full ${
-                isMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
-              } transition-colors`}
+              className={`p-3 rounded-full ${isMuted ? 'bg-red-500 hover:bg-red-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
+                } transition-colors`}
               title={isMuted ? 'Unmute' : 'Mute'}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -345,9 +344,8 @@ export default function Room() {
 
             <motion.button
               onClick={toggleVideo}
-              className={`p-3 rounded-full ${
-                isVideoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
-              } transition-colors`}
+              className={`p-3 rounded-full ${isVideoOff ? 'bg-red-500 hover:bg-red-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
+                } transition-colors`}
               title={isVideoOff ? 'Turn on camera' : 'Turn off camera'}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -369,9 +367,8 @@ export default function Room() {
 
             <motion.button
               onClick={toggleScreenShare}
-              className={`p-3 rounded-full ${
-                isScreenSharing ? 'bg-green-500 hover:bg-green-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
-              } transition-colors`}
+              className={`p-3 rounded-full ${isScreenSharing ? 'bg-green-500 hover:bg-green-600' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
+                } transition-colors`}
               title={isScreenSharing ? 'Stop presenting' : 'Present now'}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -388,9 +385,8 @@ export default function Room() {
 
             <motion.button
               onClick={toggleChat}
-              className={`p-3 rounded-full ${
-                showChat ? 'bg-[#4a4d51]' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
-              } transition-colors`}
+              className={`p-3 rounded-full ${showChat ? 'bg-[#4a4d51]' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
+                } transition-colors`}
               title="Chat with everyone"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -403,9 +399,8 @@ export default function Room() {
 
             <motion.button
               onClick={toggleParticipants}
-              className={`p-3 rounded-full ${
-                showParticipants ? 'bg-[#4a4d51]' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
-              } transition-colors`}
+              className={`p-3 rounded-full ${showParticipants ? 'bg-[#4a4d51]' : 'bg-[#3c4043] hover:bg-[#4a4d51]'
+                } transition-colors`}
               title="Show everyone"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

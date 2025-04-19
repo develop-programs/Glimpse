@@ -83,7 +83,7 @@ export default function Testimonials() {
                                 <p className="text-base sm:text-lg leading-relaxed italic text-slate-700">{truncateText(testimonial.quote, 80)}</p>
 
                                 <div className="mt-6 sm:mt-8 flex flex-wrap sm:flex-nowrap items-center">
-                                    <div className="flex-shrink-0 size-8 sm:size-10 rounded-full bg-gradient-to-br from-sky-400 to-green-400 flex items-center justify-center text-white font-medium shadow-md group-hover:shadow-sky-200">
+                                    <div className="flex-shrink-0 size-8 sm:size-10 rounded-full bg-gradient-to-br from-sky300 via-blue-400 to-green-500 flex items-center justify-center text-white font-medium shadow-md group-hover:shadow-sky-200">
                                         {testimonial.avatar}
                                     </div>
                                     <div className="ml-4 flex-grow min-w-0">

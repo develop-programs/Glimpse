@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { VideoIcon, LinkIcon } from "lucide-react";
@@ -22,6 +22,11 @@ import AiChat from '@/components/AiChat';
 
 export default function DashboardPage() {
     const [showGettingStarted, setShowGettingStarted] = useState(true);
+
+    React.useEffect(() => {
+        // Scroll to the top of the page when the component mounts
+        window.scrollTo(0, 0);
+    }, [])
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pb-24">
@@ -53,7 +58,7 @@ export default function DashboardPage() {
                                             <LinkIcon className="h-4 w-4 mr-2" /> Join Meeting
                                         </Button>
                                     </DialogTrigger>
-                                    <DialogContent>
+                                    <DialogContent className="max-w-md w-full">
                                         <Join />
                                     </DialogContent>
                                 </Dialog>
@@ -66,7 +71,7 @@ export default function DashboardPage() {
                                             <VideoIcon className="h-4 w-4 mr-2" /> New Meeting
                                         </Button>
                                     </DialogTrigger>
-                                    <DialogContent>
+                                    <DialogContent className="max-w-md w-full">
                                         <NewMeeting />
                                     </DialogContent>
                                 </Dialog>
@@ -80,39 +85,51 @@ export default function DashboardPage() {
                     )}
 
                     {/* Main Dashboard Content */}
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
-                        {/* Left Column */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
+                        {/* Left Column - Full width on small screens, 8/12 on large screens */}
                         <motion.div
-                            className="md:col-span-8 space-y-5"
+                            className="col-span-1 lg:col-span-8 space-y-4 md:space-y-5"
                             initial={{ opacity: 0, x: -5 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 }}
                         >
                             {/* Quick Actions */}
-                            <QuickActions />
+                            <div className="w-full overflow-x-auto">
+                                <QuickActions />
+                            </div>
 
                             {/* Upcoming Meetings */}
-                            <UpcomingMeetings />
+                            <div className="w-full overflow-x-auto">
+                                <UpcomingMeetings />
+                            </div>
 
                             {/* Recent Meetings */}
-                            <RecentMeetings />
+                            <div className="w-full overflow-x-auto">
+                                <RecentMeetings />
+                            </div>
                         </motion.div>
 
-                        {/* Right Column */}
+                        {/* Right Column - Full width on small screens, 4/12 on large screens */}
                         <motion.div
-                            className="md:col-span-4 space-y-5"
+                            className="col-span-1 lg:col-span-4 space-y-4 md:space-y-5"
                             initial={{ opacity: 0, x: 5 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.4, delay: 0.3 }}
                         >
                             {/* Meeting Stats */}
-                            <MeetingStats />
+                            <div className="w-full">
+                                <MeetingStats />
+                            </div>
 
                             {/* Team Members */}
-                            <TeamMembers />
+                            <div className="w-full">
+                                <TeamMembers />
+                            </div>
 
                             {/* Help & Tips */}
-                            <QuickTips />
+                            <div className="w-full">
+                                <QuickTips />
+                            </div>
                         </motion.div>
                     </div>
                 </div>

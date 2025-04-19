@@ -6,19 +6,19 @@ const PROCESS_STEPS = [
     step: 1,
     title: "Create or Join",
     description: "Start a new meeting instantly or join with a meeting code in just one click",
-    color: "from-blue-400 to-sky-500"
+    color: "from-blue-600 to-indigo-500"
   },
   {
     step: 2,
     title: "Invite Others",
     description: "Share the meeting link or code with participants via any platform",
-    color: "from-sky-500 to-blue-500"
+    color: "from-indigo-500 via-purple-500 to-blue-500"
   },
   {
     step: 3,
     title: "Collaborate",
     description: "Enjoy crystal-clear video, screen sharing, and interactive tools",
-    color: "from-blue-500 to-green-500"
+    color: "from-teal-400 via-blue-500 to-indigo-500"
   }
 ]
 
@@ -57,7 +57,7 @@ export default function HowItWork() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <div className={`bg-gradient-to-r ${color} h-16 w-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-md mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`bg-gradient-to-br ${color} h-16 w-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-md mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     {step}
                   </div>
                   <h3 className="text-2xl font-semibold tracking-tight mb-3">{title}</h3>
