@@ -56,3 +56,6 @@ tsconfig.tsbuildinfo
 **/public/workbox-*.js
 **/public/sw.js
 **/public/fallback-*.js
+
+package-lock.json
+bun.lock
