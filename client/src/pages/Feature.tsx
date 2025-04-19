@@ -136,23 +136,23 @@ export default function Feature() {
                     transition={{ duration: 0.7 }}
                     className="py-12 md:py-20"
                 >
-                    <Tabs defaultValue="free" className="w-full max-w-5xl mx-auto">
+                    <Tabs defaultValue="free" className="w-full max-w-7xl mx-auto">
                         <div className="text-center mb-10">
                             <h2 className="text-[clamp(1.875rem,5vw,2.5rem)] font-bold mb-4 bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">Choose Your Experience</h2>
                             <p className="text-[clamp(1rem,3vw,1.125rem)] text-muted-foreground max-w-2xl mx-auto">
                                 Discover the perfect features for your team's communication needs
                             </p>
-                            <TabsList className="mt-6 bg-slate-100/90 px-3 py-6 border border-slate-200/50 shadow-sm">
+                            <TabsList className="mt-6 bg-slate-100/90 px-1 py-2 border border-slate-200/50 shadow-sm">
                                 <TabsTrigger
                                     value="free"
-                                    className="text-[clamp(0.875rem,2.5vw,1rem)] py-4 px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-400 data-[state=active]:text-white data-[state=active]:shadow-md"
+                                    className="text-[clamp(0.875rem,2.5vw,1rem)] py-3.5 px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-emerald-400 data-[state=active]:text-white data-[state=active]:shadow-md"
                                 >
                                     <Sparkles className="mr-2 h-4 w-4" />
                                     Free Features
                                 </TabsTrigger>
                                 <TabsTrigger
                                     value="premium"
-                                    className="text-[clamp(0.875rem,2.5vw,1rem)] py-4 px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+                                    className="text-[clamp(0.875rem,2.5vw,1rem)] py-3 px-6 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-600 data-[state=active]:to-blue-500 data-[state=active]:text-white data-[state=active]:shadow-md"
                                 >
                                     <Star className="mr-2 h-4 w-4" />
                                     Premium Features

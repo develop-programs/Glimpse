@@ -112,7 +112,7 @@ export default function Pricing() {
     <>
       <Navbar />
       <div className="mt-44">
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-green-500 bg-clip-text text-transparent">Simple, transparent pricing</h1>
             <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
