@@ -28,28 +28,13 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Cache Bun dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-
       - name: Install dependencies
         working-directory: ./client
-        run: bun install --frozen-lockfile
+        run: bun install
 
-      - name: Build application
+      - name: Build client
         working-directory: ./client
         run: bun run build
-
-      - name: Configure build directory
-        run: |
-          # Create a _redirects file for SPA routing if it doesn't exist
-          echo "/* /index.html 200" > ./client/dist/_redirects
-          # Create a basic deno.json configuration if needed
-          echo '{"compilerOptions":{"jsx":"react-jsx"}}' > ./client/dist/deno.json
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
@@ -57,7 +42,5 @@ jobs:
           project: "shreyanshaw-glimpse-91"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
           root: "client/dist"
-          no-static: false
-          import-map: './client/dist/deno.json'
 
 
