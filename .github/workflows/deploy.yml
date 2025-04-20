@@ -23,16 +23,33 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: lts/*
+          bun-version: latest
 
-      - name: Install step
-        run: "npm install"
+      - name: Cache Bun dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: Build step
-        run: "npm run build"
+      - name: Install dependencies
+        working-directory: ./client
+        run: bun install --frozen-lockfile
+
+      - name: Build application
+        working-directory: ./client
+        run: bun run build
+
+      - name: Configure build directory
+        run: |
+          # Create a _redirects file for SPA routing if it doesn't exist
+          echo "/* /index.html 200" > ./client/dist/_redirects
+          # Create a basic deno.json configuration if needed
+          echo '{"compilerOptions":{"jsx":"react-jsx"}}' > ./client/dist/deno.json
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
@@ -40,5 +57,7 @@ jobs:
           project: "shreyanshaw-glimpse-91"
           entrypoint: "https://deno.land/std@0.217.0/http/file_server.ts"
           root: "client/dist"
-          
-          
+          no-static: false
+          import-map: './client/dist/deno.json'
+
+
