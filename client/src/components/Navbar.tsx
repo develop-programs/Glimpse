@@ -30,8 +30,9 @@ export default function Navbar() {
           <img
             src="/glimpse.webp"
             alt="Glimpse"
-            width={112}
-            height={40}
+            width={200}
+            height={50}
+            className="h-6 w-24 md:h-8 md:w-auto"
             decoding="async"
             loading="lazy"
           />

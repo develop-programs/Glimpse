@@ -11,6 +11,7 @@ const Loading = lazy(() => import("@/pages/Loading"));
 const Room = lazy(() => import("@/pages/room/room"));
 const Feature = lazy(() => import("@/pages/Feature"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const NewUser = lazy(() => import("@/pages/auth/NewUser"));
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,12 @@ export const router = createBrowserRouter([
     path: "/auth/login",
     element: <Suspense fallback={<Loading />}>
       <Login />
+    </Suspense>,
+  },
+  {
+    path: "/auth/signup",
+    element: <Suspense fallback={<Loading />}>
+      <NewUser />
     </Suspense>,
   },
   {

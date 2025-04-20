@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Video, Calendar, Shield, Users, Zap } from "lucide-react";
+import { ArrowRight, Video, Shield, Users, Zap } from "lucide-react";
 import { Link } from "react-router";
 import React, { lazy } from "react";
 import Navbar from "@/components/Navbar";
@@ -54,16 +54,10 @@ export default function App() {
               </div>
 
               <div className="flex flex-row gap-3 sm:gap-4">
-                <Link to="/room/new">
-                  <Button size="lg" className="group">
+                <Link to="/Dashboard">
+                  <Button className="group flex items-center gap-2">
                     Start a Meeting
-                    <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <Link to="/schedule">
-                  <Button size="lg" variant="outline">
-                    Schedule a Meeting
-                    <Calendar className="size-4" />
+                    <ArrowRight className="text-[clamp(0.85rem,1vw,1.5rem)] size-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </div>

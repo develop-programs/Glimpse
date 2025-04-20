@@ -200,11 +200,10 @@ export default function Login() {
                 Google
               </Button>
               <Button variant="outline" className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4">
-                  <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"></path>
-                  <path d="M10 2c1 .5 2 2 2 5"></path>
+                <svg width="26" height="47" viewBox="0 0 26 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.4927 26.6403L24.7973 18.3588H16.7611V12.9759C16.7611 10.7114 17.883 8.49872 21.4706 8.49872H25.1756V1.44655C23.018 1.10279 20.8378 0.91682 18.6527 0.890137C12.0385 0.890137 7.72038 4.86265 7.72038 12.0442V18.3588H0.388672V26.6403H7.72038V46.671H16.7611V26.6403H23.4927Z" fill="#337FFF" />
                 </svg>
-                Apple
+                Facebook
               </Button>
             </div>
 
