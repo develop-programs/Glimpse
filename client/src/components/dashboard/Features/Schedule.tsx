@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { Info, CalendarClock, Clock, Users, FileText, Lock, Sparkles } from 'lucide-react'
 import { Textarea } from '@/components/ui/textarea'
 import MultipleSelector, { Option } from '@/components/ui/MultiSelect'
-import { DatetimePicker } from '@/components/ui/DateTimePicker'
 import { Switch } from '@/components/ui/switch'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -50,7 +49,7 @@ export default function Schedule() {
     defaultValues: {
       title: "",
       dateTime: new Date(),
-      isProtected: true,
+      isProtected: false,
       password: "",
       participants: [],
       description: "",
@@ -120,14 +119,14 @@ export default function Schedule() {
                     <span className="text-destructive">*</span>
                   </FormLabel>
                   <FormControl>
-                    <DatetimePicker
-                      value={field.value}
-                      onChange={field.onChange}
-                      format={[
-                        ["months", "days", "years"],
-                        ["hours", "minutes", "am/pm"],
-                      ]}
-                      className='w-full'
+                    <Input
+                      type="datetime-local"
+                      className="mt-0.5 bg-background focus:ring-primary"
+                      value={field.value instanceof Date ? field.value.toISOString().slice(0, 16) : ''}
+                      onChange={(e) => {
+                        const date = new Date(e.target.value);
+                        field.onChange(date);
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
