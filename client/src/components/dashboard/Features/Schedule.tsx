@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
+import { DialogHeader, DialogTitle, DialogFooter, DialogClose } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { motion } from 'framer-motion'
 import { Info, CalendarClock, Clock, Users, FileText, Lock, Sparkles } from 'lucide-react'
@@ -48,7 +48,7 @@ export default function Schedule() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
-      dateTime: new Date(),
+      dateTime: new Date(Date.now()),
       isProtected: false,
       password: "",
       participants: [],
@@ -64,6 +64,9 @@ export default function Schedule() {
 
   return (
     <div className="space-y-4">
+      <DialogClose onClick={() => {
+        form.reset()
+      }} />
       <DialogHeader className="pb-1 border-b">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -127,6 +130,7 @@ export default function Schedule() {
                         const date = new Date(e.target.value);
                         field.onChange(date);
                       }}
+                      defaultValue={field.value instanceof Date ? field.value.toISOString().slice(0, 16) : ''}
                     />
                   </FormControl>
                   <FormMessage />
