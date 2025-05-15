@@ -13,13 +13,15 @@ import {
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { motion } from 'framer-motion';
-import { EyeIcon, EyeOffIcon, LockIcon, MailIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, LockIcon, MailIcon, Loader2 } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate, useLocation } from 'react-router';
+import { useAuth } from '@/context/AuthContext';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
-  email: z.string().email().min(1, {
-    message: "Email is required",
+  email: z.string().email({
+    message: "Please enter a valid email address",
   }),
   password: z.string().min(1, {
     message: "Password is required",
@@ -27,6 +29,15 @@ const formSchema = z.object({
 })
 
 export default function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  
+  // Get return URL from location state or default to dashboard
+  const from = (location.state as any)?.from?.pathname || '/dashboard';
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,11 +46,24 @@ export default function Login() {
     },
   })
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    // Handle login logic here
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    
+    try {
+      const success = await login(data.email, data.password);
+      
+      if (success) {
+        toast.success("Login successful!");
+        navigate(from, { replace: true });
+      } else {
+        toast.error("Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("An error occurred during login");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -172,8 +196,19 @@ export default function Login() {
                   transition={{ delay: 0.4 }}
                   className="pt-2"
                 >
-                  <Button type="submit" className="w-full py-6 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-lg font-medium shadow-md">
-                    Sign In
+                  <Button 
+                    type="submit" 
+                    className="w-full py-6 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-lg font-medium shadow-md"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Signing in...
+                      </>
+                    ) : (
+                      "Sign In"
+                    )}
                   </Button>
                 </motion.div>
               </form>

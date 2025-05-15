@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { VideoIcon, LinkIcon } from "lucide-react";
-
 // Dashboard Components
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import QuickActions from "@/components/dashboard/QuickActions";
@@ -19,14 +18,36 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import NewMeeting from '@/components/dashboard/Features/NewMeeting';
 import Join from '@/components/dashboard/Features/Join';
 import AiChat from '@/components/AiChat';
+import { useAuth } from '@/context/AuthContext';
+import { Loader2 } from 'lucide-react';
+import { useNavigate } from 'react-router';
 
 export default function DashboardPage() {
     const [showGettingStarted, setShowGettingStarted] = useState(true);
+    const { user, isLoading, isAuthenticated } = useAuth();
+
+    const navigate = useNavigate()
+
+    if (!isAuthenticated) {
+        navigate("/auth/login")
+    }
+
 
     React.useEffect(() => {
         // Scroll to the top of the page when the component mounts
         window.scrollTo(0, 0);
-    }, [])
+    }, []);
+
+    if (isLoading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-900">
+                <div className="text-center">
+                    <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto mb-4" />
+                    <p className="text-slate-600 dark:text-slate-300">Loading dashboard...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 pb-24">
@@ -34,6 +55,18 @@ export default function DashboardPage() {
                 <div className="space-y-5">
                     {/* Dashboard Header */}
                     <DashboardHeader />
+
+                    {/* Welcome message with user name */}
+                    {user && (
+                        <motion.p
+                            initial={{ opacity: 0, y: -5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-lg text-slate-600 dark:text-slate-300"
+                        >
+                            Welcome back, <span className="font-medium text-primary">{user.name}</span>! Your workspace is ready.
+                        </motion.p>
+                    )}
 
                     {/* Main Call-to-Action */}
                     <motion.div

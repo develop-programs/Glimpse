@@ -84,7 +84,7 @@ const DesktopControls = () => (
           <HelpCircleIcon className="size-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align='end' className='max-w-lg'>
+      <PopoverContent align='end'>
         <div className="space-y-3">
           <h4 className="font-medium">Need help?</h4>
           <HelpContent />
@@ -115,7 +115,7 @@ const DesktopControls = () => (
           <AvatarFallback className="bg-primary text-primary-foreground">US</AvatarFallback>
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent align='end' className='max-w-52'>
+      <PopoverContent align='end'>
         <Account />
       </PopoverContent>
     </Popover>

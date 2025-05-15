@@ -1,76 +1,37 @@
 import { LogOut, Settings, User, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { useNavigate } from 'react-router'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { toast } from 'sonner'
+import { useAuth } from '@/context/AuthContext'
+import { useNavigate } from 'react-router'
 
 export default function Account() {
+    const { user, logout } = useAuth();
+    const [logoutLoading, setLogoutLoading] = useState(false);
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
-    const [logoutLoading, setLogoutLoading] = useState(false)
-
-    // Replace with actual user data from your auth context/state management
-    const [user] = useState({
-        name: 'User Smith',
-        email: 'user@example.com',
-        role: 'Pro User',
-        avatar: 'https://github.com/shadcn.png' // Add a default or placeholder avatar URL
-    })
-
-    useEffect(() => {
-        // Here you would fetch the user data from your API/auth system
-        const fetchUserData = async () => {
-            setLoading(true)
-            try {
-                // Mock API call - replace with actual API call
-                // const response = await fetch('/api/user/profile')
-                // const userData = await response.json()
-                // setUser(userData)
-
-                // Simulating API delay for demo
-                setTimeout(() => {
-                    setLoading(false)
-                }, 500)
-            } catch (error) {
-                console.error('Failed to fetch user data', error)
-                toast.error("Failed to load user profile data")
-                setLoading(false)
-            }
-        }
-
-        fetchUserData()
-    }, [])
-
     const handleLogout = async () => {
-        setLogoutLoading(true)
+        setLogoutLoading(true);
         try {
-            // Add actual logout logic here - e.g., API call to logout endpoint
-            // await fetch('/api/auth/logout', { method: 'POST' })
-
-            // Clear local storage/cookies
-            localStorage.removeItem('token') // Adjust based on your auth implementation
-
-            // Simulate API delay for demo
             setTimeout(() => {
-                toast.success("You have been successfully logged out")
-                navigate('/login')
-                setLogoutLoading(false)
-            }, 800)
+                toast.success("You have been successfully logged out");
+                logout();
+                setLogoutLoading(false);
+            }, 800);
         } catch (error) {
-            console.error('Logout failed', error)
-            toast.error("Logout failed, please try again")
-            setLogoutLoading(false)
+            console.error('Logout failed', error);
+            toast.error("Logout failed, please try again");
+            setLogoutLoading(false);
         }
-    }
+    };
 
-    if (loading) {
+    if (!user) {
         return (
             <div className="py-6 px-4 flex justify-center items-center">
                 <Loader2 className="h-6 w-6 animate-spin text-primary" />
             </div>
-        )
+        );
     }
 
     return (
@@ -87,7 +48,7 @@ export default function Account() {
             </div>
 
             <span className="bg-primary/10 text-primary text-xs px-2 py-0.5 rounded-full w-fit mb-2 inline-block">
-                {user.role}
+                {user.role || 'User'}
             </span>
 
             <Separator className="my-2" />
@@ -130,5 +91,5 @@ export default function Account() {
                 {logoutLoading ? "Logging out..." : "Logout"}
             </Button>
         </div>
-    )
+    );
 }

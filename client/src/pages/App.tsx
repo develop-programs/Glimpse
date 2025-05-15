@@ -5,13 +5,6 @@ import React, { lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-// import { io } from "socket.io-client";
-
-// const socket = io("http://localhost:5000", {
-//   path: "/ws"
-// })
-
-// Import newly created components
 const Testimonials = lazy(() => import("@/components/landing/Testimonials"));
 const CTASection = lazy(() => import("@/components/landing/CTASection"));
 const Feature = lazy(() => import("@/components/landing/Feature"));
@@ -21,14 +14,6 @@ export default function App() {
   React.useEffect(() => {
 
     window.scrollTo(0, 0);
-
-
-    // socket.on("connect", () => {
-    //   console.log("Connected to WebSocket server");
-    // });
-    // socket.on("disconnect", () => {
-    //   console.log("Disconnected from WebSocket server");
-    // });
 
   }, []);
   return (

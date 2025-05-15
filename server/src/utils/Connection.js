@@ -16,7 +16,7 @@ export async function connectDb() {
 
     // Get MongoDB URI from environment variables or use default
     const mongoURI =
-      process.env.MONGODB_URI || "mongodb://localhost:27017/myapp";
+      process.env.MONGODB_URL || "mongodb://localhost:27017/myapp";
 
     // Set connection options for better stability and performance
     const options = {

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { Suspense } from "react";
 import { lazy } from "react";
+import { AuthProvider } from "@/context/AuthContext";
 
 const App = lazy(() => import("@/pages/App"));
 const Pricing = lazy(() => import("@/pages/pricing/Pricing"));
@@ -41,13 +42,17 @@ export const router = createBrowserRouter([
   {
     path: "/Dashboard",
     element: <Suspense fallback={<Loading />}>
-      <DashboardPage />
+      <AuthProvider>
+        <DashboardPage />
+      </AuthProvider>
     </Suspense>,
   },
   {
     path: "/auth/login",
     element: <Suspense fallback={<Loading />}>
-      <Login />
+      <AuthProvider>
+        <Login />
+      </AuthProvider>
     </Suspense>,
   },
   {
