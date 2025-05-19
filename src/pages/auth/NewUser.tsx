@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -17,6 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Checkbox } from "@/components/ui/checkbox";
 import { EyeIcon, EyeOffIcon, LockIcon, MailIcon, UserIcon, Loader2 } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -38,6 +40,12 @@ const formSchema = z.object({
 });
 
 export default function NewUser() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { signup } = useAuth()
+
+    const from = (location.state as any)?.from?.pathname || '/auth/login';
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -53,15 +61,18 @@ export default function NewUser() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    function onSubmit(data: z.infer<typeof formSchema>) {
+    async function onSubmit(data: z.infer<typeof formSchema>) {
         setIsSubmitting(true);
         console.log(data);
-        // Simulate API call
+        await signup(data.name, data.email, data.password)
+        toast.success(
+            "User registerd successfully"
+        )
+        navigate(from, { replace: true });
         setTimeout(() => {
             setIsSubmitting(false);
-            // Handle success or error
         }, 1500);
-        // Handle form submission here - API call to create account
+
     }
 
     return (

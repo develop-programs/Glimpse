@@ -64,7 +64,7 @@ export default function DashboardPage() {
                             transition={{ delay: 0.1 }}
                             className="text-lg text-slate-600 dark:text-slate-300"
                         >
-                            Welcome back, <span className="font-medium text-primary">{user.name}</span>! Your workspace is ready.
+                            Welcome back, <span className="font-medium text-primary">{user && user.username}</span>! Your workspace is ready.
                         </motion.p>
                     )}
 

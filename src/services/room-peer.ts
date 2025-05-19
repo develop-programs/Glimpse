@@ -6,7 +6,7 @@ interface PeerConnectionConfig {
   onConnectionStateChange?: (state: RTCPeerConnectionState) => void;
   onTrack?: (event: RTCTrackEvent) => void;
   roomId?: string;
-  peerId?: string;
+  userId?: string;
 }
 
 interface PeerData {
@@ -16,12 +16,12 @@ interface PeerData {
   isInitiator: boolean;
 }
 
-class PeerService {
+class RoomPeerService {
   private peers: Map<string, PeerData> = new Map();
   private config: PeerConnectionConfig = {};
   private localStream: MediaStream | null = null;
   private roomId: string | null = null;
-  private userId: string | null = null;
+  private myUserId: string | null = null;
   
   constructor() {
     this.setupSocketListeners();
@@ -68,8 +68,8 @@ class PeerService {
       this.roomId = config.roomId;
     }
     
-    if (config.peerId) {
-      this.userId = config.peerId;
+    if (config.userId) {
+      this.myUserId = config.userId;
     }
   }
   
@@ -318,33 +318,16 @@ class PeerService {
   // Join a room and start connections
   public joinRoom(roomId: string, userId: string): void {
     this.roomId = roomId;
-    this.userId = userId;
+    this.myUserId = userId;
     
-    // Check if we're in guest mode
-    const isGuestMode = !localStorage.getItem('auth_token');
-    
-    if (isGuestMode) {
-      console.log('Joining room in guest mode - skipping server join');
-      // In guest mode, we don't send join_room event to the server
-      // We rely on direct WebRTC connections between peers
-      
-      // We could trigger a custom event for other guest users to discover each other
-      // This would require a discovery mechanism, for now we're keeping it simple
-      // and requiring guests to share links directly
-    } else {
-      // In authenticated mode, we join the room via websocket
-      socket.emit('join_room', { roomId });
-    }
+    socket.emit('join_room', { roomId });
   }
   
   // Leave a room and clean up all connections
   public leaveRoom(): void {
     if (!this.roomId) return;
     
-    // Only send leave_room if we're authenticated
-    if (localStorage.getItem('auth_token')) {
-      socket.emit('leave_room', { roomId: this.roomId });
-    }
+    socket.emit('leave_room', { roomId: this.roomId });
     
     // Clean up all peer connections
     this.peers.forEach((_, peerId) => {
@@ -367,6 +350,31 @@ class PeerService {
       this.localStream = null;
     }
   }
+
+  // Method from old peer service to maintain compatibility
+  async getOffer(): Promise<RTCSessionDescriptionInit | undefined> {
+    // This is just to maintain compatibility with old code
+    console.warn("getOffer() is deprecated. Use createPeerConnection() instead.");
+    return undefined;
+  }
+  
+  // Method from old peer service to maintain compatibility
+  async setOffer(offer: RTCSessionDescriptionInit): Promise<void> {
+    console.warn("setOffer() is deprecated. This method does nothing.");
+    return;
+  }
+  
+  // Method from old peer service to maintain compatibility
+  async getAnswer(offer?: RTCSessionDescriptionInit): Promise<RTCSessionDescriptionInit | undefined> {
+    console.warn("getAnswer() is deprecated. Use createPeerConnection() instead.");
+    return undefined;
+  }
+  
+  // Method from old peer service to maintain compatibility
+  async setAnswer(answer: RTCSessionDescriptionInit): Promise<void> {
+    console.warn("setAnswer() is deprecated. This method does nothing.");
+    return;
+  }
 }
 
-export const peerService = new PeerService();
+export const roomPeerService = new RoomPeerService();

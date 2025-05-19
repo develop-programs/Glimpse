@@ -1,11 +1,97 @@
 import { DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Clock, Info, Users, VideoIcon, Calendar, ArrowRight } from 'lucide-react';
+import { Clock, Info, Users, VideoIcon, Calendar, ArrowRight, Loader2 } from 'lucide-react';
 import { useAtom } from 'jotai';
 import { recentMeetingsAtom } from '@/data/recentData';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import api from '@/services/api';
+
+// Generate a random room ID for guest users
+// Exported for use in tests
+export const generateRoomId = () => {
+    return Math.random().toString(36).substring(2, 12);
+};
 
 export default function NewMeeting() {
     const [recentMeetings] = useAtom(recentMeetingsAtom);
+    const navigate = useNavigate();
+    const [isCreating, setIsCreating] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const createAndJoinMeeting = async () => {
+        try {
+            setIsCreating(true);
+            setError(null);
+            
+            // Check if user is authenticated
+            const token = localStorage.getItem('auth_token');
+            let roomId;
+            
+            // Function to check if token is valid (basic check)
+            const isTokenValid = (token: string | null): boolean => {
+                if (!token) return false;
+                // Check if token has basic JWT structure
+                const parts = token.split('.');
+                return parts.length === 3;
+            };
+            
+            if (!token || !isTokenValid(token)) {
+                // For guest users, create a random room ID
+                roomId = generateRoomId();
+                console.log('Created guest room with ID:', roomId);
+                
+                // Generate a temporary user ID for anonymous usage
+                const tempUserId = 'guest-' + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('userId', tempUserId);
+                
+                // Navigate to the room with the generated ID
+                navigate(`/room/${roomId}`);
+                return;
+            }
+            
+            // For authenticated users, use the API
+            // Generate a meeting name
+            const meetingName = `Meeting ${new Date().toLocaleString()}`;
+            
+            console.log('Creating room with name:', meetingName);
+            
+            try {
+                // Create room via API
+                const response = await api.post('/api/rooms', {
+                    name: meetingName,
+                    description: `Instant meeting created on ${new Date().toLocaleString()}`
+                });
+                
+                console.log('Room creation response:', response);
+                
+                if (response.data && response.data.data) {
+                    roomId = response.data.data._id;
+                    console.log('Created room with ID:', roomId);
+                    // Navigate to the room
+                    navigate(`/room/${roomId}`);
+                } else {
+                    throw new Error('Failed to create room: Invalid server response');
+                }
+            } catch (apiError) {
+                console.error('API error creating room:', apiError);
+                // If API call fails (401 unauthorized or other error), fall back to guest mode
+                console.log('Falling back to guest mode due to API error');
+                roomId = generateRoomId();
+                console.log('Created guest room with ID:', roomId);
+                navigate(`/room/${roomId}`);
+            }
+        } catch (err) {
+            console.error('Error creating meeting:', err);
+            setError(err instanceof Error ? err.message : 'Failed to create meeting');
+        } finally {
+            setIsCreating(false);
+        }
+    };
+
+    const joinExistingMeeting = (meetingId: string) => {
+        navigate(`/room/${meetingId}`);
+    };
 
     return (
         <div className="space-y-8">
@@ -17,6 +103,12 @@ export default function NewMeeting() {
                     </span>
                 </DialogTitle>
             </DialogHeader>
+
+            {error && (
+                <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-3 rounded-lg text-sm">
+                    {error}
+                </div>
+            )}
 
             <div className="w-full grid grid-cols-1 gap-4">
                 {/* Start Meeting Card */}
@@ -34,9 +126,19 @@ export default function NewMeeting() {
                         </div>
                         <Button
                             className="mt-auto bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all"
-                            onClick={() => console.log("Starting instant meeting")}
+                            onClick={createAndJoinMeeting}
+                            disabled={isCreating}
                         >
-                            Start Now <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                            {isCreating ? (
+                                <>
+                                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                    Creating...
+                                </>
+                            ) : (
+                                <>
+                                    Start Now <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                                </>
+                            )}
                         </Button>
                     </div>
                 </div>
@@ -77,7 +179,7 @@ export default function NewMeeting() {
                                     dark:text-blue-400 hover:text-blue-700 border border-blue-200 dark:border-blue-800 rounded-lg"
                                     size="sm"
                                     variant="outline"
-                                    onClick={() => console.log(`Joining meeting: ${meeting.id}`)}
+                                    onClick={() => joinExistingMeeting(String(meeting.id))}
                                 >
                                     Resume
                                 </Button>

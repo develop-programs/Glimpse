@@ -34,7 +34,7 @@ export default function Login() {
   const { login } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  
+
   // Get return URL from location state or default to dashboard
   const from = (location.state as any)?.from?.pathname || '/dashboard';
 
@@ -48,10 +48,10 @@ export default function Login() {
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
+
     try {
       const success = await login(data.email, data.password);
-      
+
       if (success) {
         toast.success("Login successful!");
         navigate(from, { replace: true });
@@ -196,8 +196,8 @@ export default function Login() {
                   transition={{ delay: 0.4 }}
                   className="pt-2"
                 >
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full py-6 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-lg font-medium shadow-md"
                     disabled={isSubmitting}
                   >
@@ -244,7 +244,7 @@ export default function Login() {
 
             <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
               Don't have an account?{" "}
-              <Link to="/auth/register" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
+              <Link to="/auth/signup" className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
                 Create one
               </Link>
             </p>

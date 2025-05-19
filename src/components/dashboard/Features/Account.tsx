@@ -38,11 +38,11 @@ export default function Account() {
         <div className="py-3 px-2 transition-all">
             <div className="flex items-center space-x-3 mb-3">
                 <Avatar className="h-10 w-10 border-2 border-primary/10">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                    <AvatarImage src={user.avatar} alt={user.username} />
+                    <AvatarFallback>{user.username.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
-                    <p className="font-medium text-sm">{user.name}</p>
+                    <p className="font-medium text-sm">{user.username}</p>
                     <p className="text-xs text-muted-foreground">{user.email}</p>
                 </div>
             </div>

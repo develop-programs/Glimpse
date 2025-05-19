@@ -9,7 +9,7 @@ const NotFound = lazy(() => import("@/pages/404-error"));
 const DashboardPage = lazy(() => import("@/pages/Dashboard/Dashboard"));
 const Login = lazy(() => import("@/pages/auth/Login"));
 const Loading = lazy(() => import("@/pages/Loading"));
-const Room = lazy(() => import("@/pages/room/room"));
+const Room = lazy(() => import("@/pages/room/room-with-query"));
 const Feature = lazy(() => import("@/pages/Feature"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const NewUser = lazy(() => import("@/pages/auth/NewUser"));
@@ -30,7 +30,9 @@ export const router = createBrowserRouter([
   {
     path: "/room/:roomId",
     element: <Suspense fallback={<Loading />}>
-      <Room />
+      <AuthProvider>
+        <Room />
+      </AuthProvider>
     </Suspense>,
   },
   {
@@ -58,7 +60,9 @@ export const router = createBrowserRouter([
   {
     path: "/auth/signup",
     element: <Suspense fallback={<Loading />}>
-      <NewUser />
+      <AuthProvider>
+        <NewUser />
+      </AuthProvider>
     </Suspense>,
   },
   {
